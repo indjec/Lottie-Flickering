@@ -13,9 +13,18 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
-  // Pre-load the Lottie animation ahead of time
-  final _lottieAnimation = AssetLottie('assets/8.zip').load();
+class _MyAppState extends State<MyApp> { 
+
+
+// Pre-load the Lottie animation ahead of time
+
+// Pre-load a file from local asset
+//final _lottieAnimation = AssetLottie('assets/8.zip').load();
+
+// Pre-load a file from network
+final _lottieAnimation = NetworkLottie(
+    'https://d305e11xqcgjdr.cloudfront.net/stickers/cl69ghdwt000100bx966hxbp6/20.zip')
+    .load();
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +73,10 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+  
+  // Set cache size (max number of cached files)
+  Lottie.cache.maximumSize = 500;
+  
     return Scaffold(
       appBar: AppBar(
         title: const Text("Chat Screen"),
